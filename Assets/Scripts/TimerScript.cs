@@ -7,12 +7,13 @@ public class TimerScript : MonoBehaviour
 {
     public float timeRemaining = 10;
     public bool timerIsRunning = false;
-    public Text timeText;
+    public Text timerText;
 
     private void Start()
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        timerText = GetComponent<Text>();
     }
     
     void Update()
@@ -30,6 +31,7 @@ public class TimerScript : MonoBehaviour
                 timerIsRunning = false;
             }
         }
+        DisplayTime(timeRemaining);
     }
     
     void DisplayTime(float timeToDisplay)
@@ -37,7 +39,7 @@ public class TimerScript : MonoBehaviour
         timeToDisplay += 1;
         float minutes = Mathf.FloorToInt(timeToDisplay / 60); 
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }
 
