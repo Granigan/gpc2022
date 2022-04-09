@@ -6,7 +6,7 @@ public class PlayerScript : MonoBehaviour
 {
   private float horizontal;
   private float vertical;
-  public float speed = 4.0f;
+  public float speed = 1.0f;
   Rigidbody2D rb;
   
     // Start is called before the first frame update
