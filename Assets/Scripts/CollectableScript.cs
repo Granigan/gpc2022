@@ -19,10 +19,7 @@ public class CollectableScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
       Debug.Log("2d collision");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-      Debug.Log("collision!");
+      // remove this object
+      Destroy(gameObject);
     }
 }
