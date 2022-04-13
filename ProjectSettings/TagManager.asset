@@ -41,9 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Transportation
+    uniqueID: 2830908255
+    locked: 0
   - name: Collectable
     uniqueID: 256554293
     locked: 0
   - name: Player
     uniqueID: 1156382097
+    locked: 0
+  - name: UI
+    uniqueID: 1873673473
     locked: 0

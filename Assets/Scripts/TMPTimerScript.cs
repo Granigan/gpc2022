@@ -47,5 +47,10 @@ public class TMPTimerScript : MonoBehaviour
   {
     timeRemaining += timeToAdd;
   }
+
+  public void EndGame()
+  {
+    timerIsRunning = false;
+  }
 }
 
