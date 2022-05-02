@@ -9,14 +9,14 @@ public class TMPTimerScript : MonoBehaviour
   public float timeRemaining = 10;
   private bool timerIsRunning = false;
   private TextMeshProUGUI timer;
-  private GameObject player;
+  private GameObject gameManager;
 
   private void Start()
   {
     // Starts the timer automatically
     timerIsRunning = true;
     timer = GetComponent<TextMeshProUGUI>();
-    player = GameObject.Find("Player");
+    gameManager = GameObject.Find("GameManager");
   }
   
   void Update()
@@ -30,7 +30,7 @@ public class TMPTimerScript : MonoBehaviour
       timeRemaining = 0;
       timerIsRunning = false;
       timer.text = "Game over!";
-      player.GetComponent<PlayerScript>().EndGame();
+      gameManager.GetComponent<GameManagerScript>().EndGame();
     }
   }
   

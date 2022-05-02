@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ExitScript : MonoBehaviour
 {
-    private GameObject timer;
-    private GameObject player;
+    private GameObject gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        timer = GameObject.Find("TMP Timer");
+        gameManager = GameObject.Find("GameManager");
     }
 
     // Update is called once per frame
@@ -23,9 +23,7 @@ public class ExitScript : MonoBehaviour
         Debug.Log("exit collision");
         if(other.transform.tag == "Player")
         {
-          timer.GetComponent<TMPTimerScript>().EndGame();
-          player = GameObject.Find("Player");
-          player.GetComponent<PlayerScript>().EndGame();
+          gameManager.GetComponent<GameManagerScript>().EndGame();
         }
     }
 }
