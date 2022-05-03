@@ -35991,6 +35991,7 @@ GameObject:
   - component: {fileID: 1311428339}
   - component: {fileID: 1311428338}
   - component: {fileID: 1311428337}
+  - component: {fileID: 1311428340}
   m_Layer: 5
   m_Name: HUDCanvas
   m_TagString: Untagged
@@ -36079,6 +36080,18 @@ Canvas:
   m_SortingLayerID: 1873673473
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1311428340
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311428335}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1477294101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38295,7 +38308,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893974902}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0.36
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
