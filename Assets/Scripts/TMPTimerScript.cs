@@ -7,28 +7,28 @@ using TMPro;
 public class TMPTimerScript : MonoBehaviour
 {
   public float timeRemaining = 10;
-  private bool timerIsRunning = false;
+  private bool gameIsRunning;
   private TextMeshProUGUI timer;
   private GameObject gameManager;
 
   private void Start()
   {
     // Starts the timer automatically
-    timerIsRunning = true;
+    gameIsRunning = false;
     timer = GetComponent<TextMeshProUGUI>();
     gameManager = GameObject.Find("GameManager");
   }
   
   void Update()
   {
-    if (timerIsRunning && timeRemaining > 0)
+    if (gameIsRunning && timeRemaining > 0)
     {
       timeRemaining -= Time.deltaTime;
       DisplayTime(timeRemaining);
     } else
     {
       timeRemaining = 0;
-      timerIsRunning = false;
+      gameIsRunning = false;
       timer.text = "Game over!";
       gameManager.GetComponent<GameManagerScript>().EndGame();
     }
@@ -47,9 +47,16 @@ public class TMPTimerScript : MonoBehaviour
     timeRemaining += timeToAdd;
   }
 
+  public void StartGame()
+  {
+    Debug.Log("starting timer");
+    timeRemaining = 10;
+    gameIsRunning = true;
+  }
+
   public void EndGame()
   {
-    timerIsRunning = false;
+    gameIsRunning = false;
   }
 }
 

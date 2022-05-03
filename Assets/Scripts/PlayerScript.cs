@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gameIsRunning = true;
+        gameIsRunning = false;
     }
 
     // Update is called once per frame
@@ -26,6 +26,11 @@ public class PlayerScript : MonoBehaviour
 
         rb.velocity = new Vector2(horizontal * speed, vertical * speed);
       }
+    }
+
+    public void StartGame()
+    {
+      gameIsRunning = true;
     }
 
     public void EndGame()
