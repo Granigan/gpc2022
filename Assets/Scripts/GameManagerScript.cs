@@ -6,6 +6,7 @@ public class GameManagerScript : MonoBehaviour
 {
     private GameObject player;
     private GameObject timer;
+    private GameObject startMenu;
     private bool gameIsRunning;
 
     // Start is called before the first frame update
@@ -13,6 +14,7 @@ public class GameManagerScript : MonoBehaviour
     {
         player = GameObject.Find("Player");
         timer = GameObject.Find("TMP Timer");
+        startMenu = GameObject.Find("StartMenu");
         gameIsRunning = false;
     }
 
@@ -35,6 +37,7 @@ public class GameManagerScript : MonoBehaviour
           gameIsRunning = false;
           player.GetComponent<PlayerScript>().EndGame();
           timer.GetComponent<TMPTimerScript>().EndGame();
+          startMenu.GetComponent<CanvasGroup>().alpha = 1;
       }
     }
 
@@ -45,6 +48,7 @@ public class GameManagerScript : MonoBehaviour
         gameIsRunning = true;
         player.GetComponent<PlayerScript>().StartGame();
         timer.GetComponent<TMPTimerScript>().StartGame();
+        startMenu.GetComponent<CanvasGroup>().alpha = 0;
       }
     }
 }
