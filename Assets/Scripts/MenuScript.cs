@@ -14,7 +14,6 @@ public class MenuScript : MonoBehaviour
   void Start()
   {
     menuText = GetComponent<TextMeshProUGUI>();
-    // menuText.text = "Press Enter\nto Play";
     this.InitGame();
   }
 
