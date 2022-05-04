@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -38773,6 +38773,7 @@ GameObject:
   - component: {fileID: 2122990205}
   - component: {fileID: 2122990208}
   - component: {fileID: 2122990207}
+  - component: {fileID: 2122990206}
   m_Layer: 5
   m_Name: TMP Score
   m_TagString: Untagged
@@ -38799,6 +38800,18 @@ RectTransform:
   m_AnchoredPosition: {x: 900, y: 350}
   m_SizeDelta: {x: 200, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2122990206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122990204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f137e8ba2684664bac69fd310deb5d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2122990207
 MonoBehaviour:
   m_ObjectHideFlags: 0

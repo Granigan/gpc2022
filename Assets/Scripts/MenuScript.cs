@@ -6,7 +6,6 @@ using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
-
   private TextMeshProUGUI menuText;
   private GameObject gameManager;
 

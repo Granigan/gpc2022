@@ -29,7 +29,6 @@ public class TMPTimerScript : MonoBehaviour
     {
       timeRemaining = 0;
       gameIsRunning = false;
-      timer.text = "";
       gameManager.GetComponent<GameManagerScript>().LoseGame();
     }
   }
@@ -49,7 +48,6 @@ public class TMPTimerScript : MonoBehaviour
 
   public void StartGame()
   {
-    Debug.Log("starting timer");
     timeRemaining = 10;
     gameIsRunning = true;
   }

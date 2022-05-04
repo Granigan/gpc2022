@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CollectableScript : MonoBehaviour
 {
-  public GameObject timer;
+  private GameObject timer;
+  private GameObject score;
   private float bonusTime;
   private int pointValue;
 
@@ -16,6 +17,8 @@ public class CollectableScript : MonoBehaviour
   void Start()
   {
     timer = GameObject.Find("TMP Timer");
+    score = GameObject.Find("TMP Score");
+    pointValue = Random.Range(1, 5);
     spriteRenderer = GetComponent<SpriteRenderer>();
     bonusTime = 3.0f;
   }
@@ -31,6 +34,7 @@ public class CollectableScript : MonoBehaviour
     Debug.Log("2d collision");
     if(other.transform.tag == "Player")
     {
+      score.GetComponent<ScoreScript>().addScore(pointValue);
       timer.GetComponent<TMPTimerScript>().AddBonusTime(bonusTime);
     }
     // spriteRenderer.sprite = sprites[0];
