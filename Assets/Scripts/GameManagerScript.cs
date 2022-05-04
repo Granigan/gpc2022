@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -85,5 +86,15 @@ public class GameManagerScript : MonoBehaviour
         timer.GetComponent<TMPTimerScript>().StartGame();
         startMenu.GetComponent<CanvasGroup>().alpha = 0;
       }
+    }
+
+    public void LoadLowerLevel()
+    {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void LoadUpperLevel()
+    {
+      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
