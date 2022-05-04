@@ -7,7 +7,9 @@ public class GameManagerScript : MonoBehaviour
     private GameObject player;
     private GameObject timer;
     private GameObject startMenu;
+    private GameObject startMenuText;
     private bool gameIsRunning;
+    private bool gameEnded;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +17,10 @@ public class GameManagerScript : MonoBehaviour
         player = GameObject.Find("Player");
         timer = GameObject.Find("TMP Timer");
         startMenu = GameObject.Find("StartMenu");
+        startMenuText = GameObject.Find("StartMenuText");
+        startMenu.GetComponent<CanvasGroup>().alpha = 1;
         gameIsRunning = false;
+        gameEnded = false;
     }
 
     // Update is called once per frame
@@ -23,7 +28,11 @@ public class GameManagerScript : MonoBehaviour
     {
       if (Input.GetKeyDown(KeyCode.Space) || 
       Input.GetKeyDown(KeyCode.Return)) {
-        if(!gameIsRunning)
+        if(gameEnded) {
+          startMenuText.GetComponent<MenuScript>().InitGame();
+          gameEnded = false;
+        }
+        else if(!gameIsRunning)
         {
           this.StartGame();
         }
@@ -37,6 +46,32 @@ public class GameManagerScript : MonoBehaviour
           gameIsRunning = false;
           player.GetComponent<PlayerScript>().EndGame();
           timer.GetComponent<TMPTimerScript>().EndGame();
+          startMenu.GetComponent<CanvasGroup>().alpha = 1;
+      }
+    }
+
+    public void WinGame()
+    {
+      if(gameIsRunning)
+      {
+          gameIsRunning = false;
+          gameEnded = true;
+          player.GetComponent<PlayerScript>().EndGame();
+          timer.GetComponent<TMPTimerScript>().EndGame();
+          startMenuText.GetComponent<MenuScript>().WinGame();
+          startMenu.GetComponent<CanvasGroup>().alpha = 1;
+      }
+    }
+
+    public void LoseGame()
+    {
+      if(gameIsRunning)
+      {
+          gameIsRunning = false;
+          gameEnded = true;
+          player.GetComponent<PlayerScript>().EndGame();
+          timer.GetComponent<TMPTimerScript>().EndGame();
+          startMenuText.GetComponent<MenuScript>().LoseGame();
           startMenu.GetComponent<CanvasGroup>().alpha = 1;
       }
     }

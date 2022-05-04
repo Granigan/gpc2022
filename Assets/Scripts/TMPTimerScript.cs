@@ -29,8 +29,8 @@ public class TMPTimerScript : MonoBehaviour
     {
       timeRemaining = 0;
       gameIsRunning = false;
-      timer.text = "Game over!";
-      gameManager.GetComponent<GameManagerScript>().EndGame();
+      timer.text = "";
+      gameManager.GetComponent<GameManagerScript>().LoseGame();
     }
   }
   

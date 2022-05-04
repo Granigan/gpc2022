@@ -23,7 +23,7 @@ public class ExitScript : MonoBehaviour
         Debug.Log("exit collision");
         if(other.transform.tag == "Player")
         {
-          gameManager.GetComponent<GameManagerScript>().EndGame();
+          gameManager.GetComponent<GameManagerScript>().WinGame();
         }
     }
 }
