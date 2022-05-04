@@ -48,7 +48,7 @@ public class TMPTimerScript : MonoBehaviour
 
   public void StartGame()
   {
-    timeRemaining = 10;
+    timeRemaining = 30;
     gameIsRunning = true;
   }
 
