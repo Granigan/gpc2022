@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,19 @@ public class PlayerScript : MonoBehaviour
   private float vertical;
   private bool gameIsRunning;
   public float speed = 1.0f;
+
+  private bool fadingIn = true;
+  private bool facingLeft = true;
+
   Rigidbody2D rb;
+  SpriteRenderer rend;
   
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        gameIsRunning = false;
+      rb = GetComponent<Rigidbody2D>();
+      rend = GetComponent<SpriteRenderer>();
+      gameIsRunning = false;
     }
 
     // Update is called once per frame
@@ -23,14 +30,41 @@ public class PlayerScript : MonoBehaviour
       if(gameIsRunning) {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-
+        if(horizontal > 0 && facingLeft)
+        {
+          // Flip to face right
+          facingLeft = false;
+          rend.flipX = true;
+        }
+        if(horizontal < 0 && !facingLeft)
+        {
+          // Flip to face left
+          facingLeft = true;
+          rend.flipX = false;
+        }
         rb.velocity = new Vector2(horizontal * speed, vertical * speed);
       }
+
+      if(gameIsRunning && fadingIn)
+      {
+        Color playerColor = rend.color;
+        float new_a = Math.Min(1.0F, playerColor.a + 0.02F);
+        fadingIn = (new_a != 1.0F);
+        playerColor.a = new_a;
+        rend.color = playerColor;
+      }
+
     }
 
     public void StartGame()
     {
       gameIsRunning = true;
+      fadingIn = true;
+      facingLeft = true;
+      Color playerColor = rend.color;
+      playerColor.a = 0.0F;
+      rend.color = playerColor;
+
     }
 
     public void EndGame()
