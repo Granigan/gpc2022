@@ -15,7 +15,6 @@ public class CollectableScript : MonoBehaviour
   void Start()
   {
     gameManager = GameObject.Find("GameManager");
-    // score = GameObject.Find("TMP Score");
     pointValue = Random.Range(1, 5);
     spriteRenderer = GetComponent<SpriteRenderer>();
   }

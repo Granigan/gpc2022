@@ -32,15 +32,11 @@ public class PlayerScript : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
         if(horizontal > 0 && facingLeft)
         {
-          // Flip to face right
-          facingLeft = false;
-          rend.flipX = true;
+          this.FaceRight();
         }
         if(horizontal < 0 && !facingLeft)
         {
-          // Flip to face left
-          facingLeft = true;
-          rend.flipX = false;
+          this.FaceLeft();
         }
         rb.velocity = new Vector2(horizontal * speed, vertical * speed);
       }
@@ -54,6 +50,17 @@ public class PlayerScript : MonoBehaviour
         rend.color = playerColor;
       }
 
+    }
+
+    public void FaceLeft()
+    {
+      facingLeft = true;
+      rend.flipX = false;
+    }
+    public void FaceRight()
+    {
+      facingLeft = false;
+      rend.flipX = true;
     }
 
     public void StartGame()
