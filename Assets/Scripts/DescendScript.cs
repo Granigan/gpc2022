@@ -20,7 +20,7 @@ public class DescendScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("descend collision");
+        // Debug.Log("descend collision");
         if(other.transform.tag == "Player")
         {
           gameManager.GetComponent<GameManagerScript>().LoadLowerLevel();

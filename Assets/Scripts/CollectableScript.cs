@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CollectableScript : MonoBehaviour
 {
-  private GameObject score;
+  private GameObject gameManager;
   private int pointValue;
 
   private SpriteRenderer spriteRenderer;
@@ -14,7 +14,7 @@ public class CollectableScript : MonoBehaviour
 
   void Start()
   {
-    score = GameObject.Find("TMP Score");
+    gameManager = GameObject.Find("GameManager");
     pointValue = Random.Range(1, 5);
     spriteRenderer = GetComponent<SpriteRenderer>();
   }
@@ -29,7 +29,7 @@ public class CollectableScript : MonoBehaviour
   {
     if(other.transform.tag == "Player")
     {
-      score.GetComponent<ScoreScript>().addScore(pointValue);
+      gameManager.GetComponent<GameManagerScript>().addScore(pointValue);
     }
     // spriteRenderer.sprite = sprites[0];
     // remove this object
