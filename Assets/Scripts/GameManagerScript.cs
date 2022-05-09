@@ -180,7 +180,7 @@ public class GameManagerScript : MonoBehaviour
     {
       SceneManager.LoadScene(1);
       gameIsRunning = true;
-      timeRemaining = 60;
+      timeRemaining = 30;
       score = 0;
       player.transform.localPosition = new Vector3(2.5F, 1.0F, 0.0F);
       player.GetComponent<PlayerScript>().StartGame();
