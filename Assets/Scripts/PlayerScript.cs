@@ -74,6 +74,11 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+      speed = newSpeed;
+    }
+
     public void EndGame()
     {
       gameIsRunning = false;

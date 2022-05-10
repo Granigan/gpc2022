@@ -11,8 +11,10 @@ public class GameManagerScript : MonoBehaviour
   private GameObject player;
   private GameObject timerDisplay;
   private GameObject scoreDisplay;
+  private GameObject levelDisplay;
   private GameObject startMenu;
   private GameObject startMenuText;
+  private GameObject modeText;
   private bool gameIsRunning;
   private bool gameEnded;
   public float timeRemaining;
@@ -20,6 +22,7 @@ public class GameManagerScript : MonoBehaviour
   public int level;
   public bool ascended;
   public bool descended;
+  public bool fastmode;
 
   // Start is called before the first frame update
   void Start()
@@ -29,6 +32,7 @@ public class GameManagerScript : MonoBehaviour
     Debug.Log("Game running = " + gameIsRunning.ToString());
     Debug.Log("Game ended = " + gameEnded.ToString());
     Debug.Log("Time remaining = " + timeRemaining.ToString());
+
   }
 
   void Awake()
@@ -49,7 +53,9 @@ public class GameManagerScript : MonoBehaviour
     player = GameObject.Find("Player");
     timerDisplay = GameObject.Find("TMP Timer");
     scoreDisplay = GameObject.Find("TMP Score");
+    levelDisplay = GameObject.Find("TMP Level");
     startMenuText = GameObject.Find("StartMenuText");
+    modeText = GameObject.Find("ModeText");
 
     DontDestroyOnLoad(startMenu);
     DontDestroyOnLoad(hudCanvas);
@@ -59,6 +65,7 @@ public class GameManagerScript : MonoBehaviour
     gameEnded = false;
     ascended = false;
     descended = false;
+    fastmode = false;
     startMenu.GetComponent<CanvasGroup>().alpha = 1;
     hudCanvas.GetComponent<CanvasGroup>().alpha = 0;
   }
@@ -82,13 +89,13 @@ public class GameManagerScript : MonoBehaviour
             Vector3 stairPos = rootObj.transform.localPosition;
             Vector3 enterPos = new Vector3(stairPos.x - 0.2F, stairPos.y, stairPos.z);
             player.transform.localPosition = enterPos;
-            player.GetComponent<PlayerScript>().FaceLeft();
+            player.GetComponent<PlayerScript>().FaceRight();
             break;
           }
           if (descended && rootObj.name == "GoUp")
           {
             Vector3 stairPos = rootObj.transform.localPosition;
-            Vector3 enterPos = new Vector3(stairPos.x - 0.2F, stairPos.y, stairPos.z);
+            Vector3 enterPos = new Vector3(stairPos.x + 0.2F, stairPos.y, stairPos.z);
             player.transform.localPosition = enterPos;
             player.GetComponent<PlayerScript>().FaceLeft();
             break;
@@ -111,11 +118,15 @@ public class GameManagerScript : MonoBehaviour
         this.StartGame();
       }
     }
+    if (Input.GetKeyDown(KeyCode.F) && !gameIsRunning) {
+      fastmode = !fastmode;
+      modeText.GetComponent<ModeScript>().PromptFastmode(fastmode);
+    }
 
     // Timer update
     if (gameIsRunning && timeRemaining > 0)
     {
-      timeRemaining -= Time.deltaTime;
+      timeRemaining -= (Time.deltaTime * (fastmode ? 2.0F : 1.0F));
       timerDisplay.GetComponent<TMPTimerScript>().DisplayTime(timeRemaining);
     } else
     {
@@ -127,6 +138,12 @@ public class GameManagerScript : MonoBehaviour
     if (gameIsRunning)
     {
       scoreDisplay.GetComponent<ScoreScript>().DisplayScore(score);
+    }
+
+    // Level update
+    if (gameIsRunning)
+    {
+      levelDisplay.GetComponent<LevelScript>().DisplayLevel(level);
     }
 
   }
@@ -182,7 +199,9 @@ public class GameManagerScript : MonoBehaviour
       gameIsRunning = true;
       timeRemaining = 30;
       score = 0;
+      level = 1;
       player.transform.localPosition = new Vector3(2.5F, 1.0F, 0.0F);
+      player.GetComponent<PlayerScript>().SetSpeed(fastmode ? 2.0F : 1.0F);
       player.GetComponent<PlayerScript>().StartGame();
       startMenu.GetComponent<CanvasGroup>().alpha = 0;
       hudCanvas.GetComponent<CanvasGroup>().alpha = 1;
