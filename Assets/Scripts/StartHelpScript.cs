@@ -4,16 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ModeScript : MonoBehaviour
+public class StartHelpScript : MonoBehaviour
 {
-  private TextMeshProUGUI modeText;
+  private TextMeshProUGUI helpText;
   private GameObject gameManager;
 
   // Start is called before the first frame update
   void Start()
   {
-    modeText = GetComponent<TextMeshProUGUI>();
-    this.PromptFastmode(false);
+    helpText = GetComponent<TextMeshProUGUI>();
+    helpText.text =
+      "Collect items and exit before dungeon collapses.\n\u25C4\u25B2\u25BC\u25BA to Move\n[P] to Pause";
   }
 
   // Update is called once per frame
@@ -22,19 +23,14 @@ public class ModeScript : MonoBehaviour
 
   }
 
-  public void PromptFastmode(bool mode)
-  {
-    modeText.text = "[F]ast mode is " + (mode ? "on" : "off");
-  }
-
   public void Hide()
   {
-    modeText.enabled = false;
+    helpText.enabled = false;
   }
 
   public void Show()
   {
-    modeText.enabled = true;
+    helpText.enabled = true;
   }
 
 }

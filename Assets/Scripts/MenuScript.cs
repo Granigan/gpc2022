@@ -24,16 +24,19 @@ public class MenuScript : MonoBehaviour
 
   public void InitGame()
   {
+    menuText.transform.localPosition = new Vector3(0.0F, 50.0F, 0.0F);
     menuText.text = "Press Enter\nto Play";
   }
 
   public void WinGame()
   {
+    menuText.transform.localPosition = new Vector3(0.0F, 0.0F, 0.0F);
     menuText.text = "Awesome!\nYou survived!";
   }
 
   public void LoseGame()
   {
+    menuText.transform.localPosition = new Vector3(0.0F, 0.0F, 0.0F);
     menuText.text = "Game Over!";
   }
 }

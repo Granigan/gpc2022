@@ -15,8 +15,12 @@ public class GameManagerScript : MonoBehaviour
   private GameObject startMenu;
   private GameObject startMenuText;
   private GameObject modeText;
-  private bool gameIsRunning;
-  private bool gameEnded;
+  private GameObject startHelpText;
+  private GameObject pauseMenu;
+  private GameObject pauseMenuText;
+  private bool gameIsRunning; // True means the actual game play is running
+  private bool gameIsPaused; // True means the actual game play is presumably running, but it is paused
+  private bool gameEnded; // True means a round was played but we're not yet back to start screen
   public float timeRemaining;
   public int score;
   public int level;
@@ -49,6 +53,7 @@ public class GameManagerScript : MonoBehaviour
     DontDestroyOnLoad(gameObject);
 
     startMenu = GameObject.Find("StartMenu");
+    pauseMenu = GameObject.Find("PauseMenu");
     hudCanvas = GameObject.Find("HUDCanvas");
     player = GameObject.Find("Player");
     timerDisplay = GameObject.Find("TMP Timer");
@@ -56,17 +61,22 @@ public class GameManagerScript : MonoBehaviour
     levelDisplay = GameObject.Find("TMP Level");
     startMenuText = GameObject.Find("StartMenuText");
     modeText = GameObject.Find("ModeText");
+    startHelpText = GameObject.Find("StartHelpText");
+    pauseMenuText = GameObject.Find("PauseMenuText");
 
     DontDestroyOnLoad(startMenu);
+    DontDestroyOnLoad(pauseMenu);
     DontDestroyOnLoad(hudCanvas);
     DontDestroyOnLoad(player);
 
     gameIsRunning = false;
+    gameIsPaused = false;
     gameEnded = false;
     ascended = false;
     descended = false;
     fastmode = false;
     startMenu.GetComponent<CanvasGroup>().alpha = 1;
+    pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
     hudCanvas.GetComponent<CanvasGroup>().alpha = 0;
   }
 
@@ -111,6 +121,8 @@ public class GameManagerScript : MonoBehaviour
         Input.GetKeyDown(KeyCode.Return)) {
       if(gameEnded) {
         startMenuText.GetComponent<MenuScript>().InitGame();
+        modeText.GetComponent<ModeScript>().Show();
+        startHelpText.GetComponent<StartHelpScript>().Show();
         gameEnded = false;
       }
       else if(!gameIsRunning)
@@ -121,6 +133,20 @@ public class GameManagerScript : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.F) && !gameIsRunning) {
       fastmode = !fastmode;
       modeText.GetComponent<ModeScript>().PromptFastmode(fastmode);
+    }
+    if (Input.GetKeyDown(KeyCode.P) && gameIsRunning) {
+      if (!gameIsPaused)
+      {
+        Time.timeScale = 0;
+        gameIsPaused = true;
+        pauseMenu.GetComponent<CanvasGroup>().alpha = 1;
+      }
+      else
+      {
+        Time.timeScale = 1;
+        gameIsPaused = false;
+        pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
+      }
     }
 
     // Timer update
@@ -175,6 +201,8 @@ public class GameManagerScript : MonoBehaviour
         gameEnded = true;
         player.GetComponent<PlayerScript>().EndGame();
         startMenuText.GetComponent<MenuScript>().WinGame();
+        modeText.GetComponent<ModeScript>().Hide();
+        startHelpText.GetComponent<StartHelpScript>().Hide();
         startMenu.GetComponent<CanvasGroup>().alpha = 1;
     }
   }
@@ -187,6 +215,8 @@ public class GameManagerScript : MonoBehaviour
         gameEnded = true;
         player.GetComponent<PlayerScript>().EndGame();
         startMenuText.GetComponent<MenuScript>().LoseGame();
+        modeText.GetComponent<ModeScript>().Hide();
+        startHelpText.GetComponent<StartHelpScript>().Hide();
         startMenu.GetComponent<CanvasGroup>().alpha = 1;
     }
   }
@@ -204,6 +234,7 @@ public class GameManagerScript : MonoBehaviour
       player.GetComponent<PlayerScript>().SetSpeed(fastmode ? 2.0F : 1.0F);
       player.GetComponent<PlayerScript>().StartGame();
       startMenu.GetComponent<CanvasGroup>().alpha = 0;
+      pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
       hudCanvas.GetComponent<CanvasGroup>().alpha = 1;
     }
   }
