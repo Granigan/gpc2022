@@ -14,7 +14,9 @@ public class StartHelpScript : MonoBehaviour
   {
     helpText = GetComponent<TextMeshProUGUI>();
     helpText.text =
-      "Collect items and exit before dungeon collapses.\n\u25C4\u25B2\u25BC\u25BA to Move\n[P] to Pause";
+      "Collect items and exit before dungeon collapses\n" +
+      "\u25C4\u25B2\u25BC\u25BA to Move\n" +
+      "[P] to Pause and Help";
   }
 
   // Update is called once per frame

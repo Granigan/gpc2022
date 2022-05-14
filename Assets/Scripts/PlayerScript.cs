@@ -30,6 +30,8 @@ public class PlayerScript : MonoBehaviour
       if(gameIsRunning) {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+        // Make player sprite look the way it's going
+        // Default: sprite looks left
         if(horizontal > 0 && facingLeft)
         {
           this.FaceRight();
@@ -43,6 +45,7 @@ public class PlayerScript : MonoBehaviour
 
       if(gameIsRunning && fadingIn)
       {
+        // Fade in the player sprite
         Color playerColor = rend.color;
         float new_a = Math.Min(1.0F, playerColor.a + 0.02F);
         fadingIn = (new_a != 1.0F);
@@ -69,7 +72,7 @@ public class PlayerScript : MonoBehaviour
       fadingIn = true;
       facingLeft = true;
       Color playerColor = rend.color;
-      playerColor.a = 0.0F;
+      playerColor.a = 0.0F; // Make player invisible for to fade in in update loop
       rend.color = playerColor;
 
     }
